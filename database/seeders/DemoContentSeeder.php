@@ -9,6 +9,7 @@ use App\Models\JobOpening;
 use App\Models\Property;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class DemoContentSeeder extends Seeder
 {
@@ -284,65 +285,77 @@ class DemoContentSeeder extends Seeder
 
         $blogRows = [
             [
+                'slug' => 'how-to-evaluate-a-luxury-home-beyond-the-brochure',
                 'title' => 'How to evaluate a luxury home beyond the brochure',
                 'excerpt' => 'A practical framework for comparing premium listings on design, utility, and long-term value.',
                 'body' => '<p>Luxury value is built on location resilience, floor-plan function, and execution quality. In this guide we break down how to tour with a checklist that surfaces long-term advantages and hidden risks.</p>',
                 'featured_image_url' => 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80',
             ],
             [
+                'slug' => 'what-high-intent-buyers-expect-during-private-tours',
                 'title' => 'What high-intent buyers expect during private tours',
                 'excerpt' => 'From pre-reads to route planning, details that shape a confident decision-making experience.',
                 'body' => '<p>Great tours are structured, contextual, and paced for decision-making. We share the process we use to help buyers compare homes clearly and move with confidence.</p>',
                 'featured_image_url' => 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=80',
             ],
             [
+                'slug' => '2026-market-pulse-inventory-pricing-and-timing',
                 'title' => '2026 market pulse: inventory, pricing, and timing',
                 'excerpt' => 'What current inventory and buyer demand suggest for sellers and strategic buyers this season.',
                 'body' => '<p>Inventory conditions vary by micro-market. This pulse report outlines what matters most for pricing strategy, offer terms, and negotiation leverage.</p>',
                 'featured_image_url' => 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80',
             ],
             [
+                'slug' => 'design-features-long-term-resale-value',
                 'title' => 'Design features that preserve long-term resale value',
                 'excerpt' => 'How layout, daylight, and material choices influence durability and buyer appeal over time.',
                 'body' => '<p>Timeless layouts and well-executed fundamentals consistently outperform trend-driven updates. We outline what to prioritize when evaluating premium homes.</p>',
                 'featured_image_url' => 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1200&q=80',
             ],
             [
+                'slug' => 'negotiation-playbook-competitive-luxury-markets',
                 'title' => 'Negotiation playbook for competitive luxury markets',
                 'excerpt' => 'A practical framework for structuring offers that protect downside while staying competitive.',
                 'body' => '<p>Strong offers are more than headline numbers. We review contingencies, timelines, and communication tactics that improve acceptance odds without overexposure.</p>',
-                'featured_image_url' => 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=80',
+                'featured_image_url' => 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1200&q=80',
             ],
             [
+                'slug' => 'waterfront-buying-checklist-risk-insurance-upkeep',
                 'title' => 'Waterfront buying checklist: risk, insurance, and upkeep',
                 'excerpt' => 'What buyers should inspect beyond views: flood maps, maintenance cycles, and reserve planning.',
                 'body' => '<p>Waterfront ownership can be exceptional when diligence is thorough. This checklist covers the structural, legal, and operational details buyers should review.</p>',
                 'featured_image_url' => 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=1200&q=80',
             ],
             [
+                'slug' => 'prepare-home-high-intent-showing',
                 'title' => 'How to prepare your home for a high-intent showing',
                 'excerpt' => 'Staging and presentation tactics that shorten decision cycles and improve offer quality.',
                 'body' => '<p>Preparation creates momentum. We share the sequence we use to align styling, lighting, and narrative before private showings.</p>',
                 'featured_image_url' => 'https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=1200&q=80',
             ],
             [
+                'slug' => 'second-home-strategy-lifestyle-numbers',
                 'title' => 'Second-home strategy: lifestyle first, numbers always',
                 'excerpt' => 'Balancing personal use with operating costs, tax implications, and rental optionality.',
                 'body' => '<p>A successful second-home purchase starts with clear usage goals and realistic carrying assumptions. We walk through a balanced decision framework.</p>',
                 'featured_image_url' => 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&q=80',
             ],
             [
+                'slug' => 'reading-neighborhood-momentum-early-signals',
                 'title' => 'Reading neighborhood momentum before it hits headlines',
                 'excerpt' => 'Signals we monitor weekly to identify early shifts in demand and pricing power.',
                 'body' => '<p>Neighborhood momentum often appears in micro-signals before broad data catches up. Here is how we track those signals for clients making timing decisions.</p>',
-                'featured_image_url' => 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80',
+                'featured_image_url' => 'https://images.unsplash.com/photo-1449844908441-8829872d2607?w=1200&q=80',
             ],
         ];
 
         foreach ($blogRows as $i => $row) {
+            $slug = $row['slug'] ?? Str::slug(Str::limit($row['title'], 200, '')) ?: ('post-'.($i + 1));
             BlogPost::query()->updateOrCreate(
-                ['title' => $row['title']],
+                ['slug' => $slug],
                 [
+                    'title' => $row['title'],
+                    'slug' => $slug,
                     'excerpt' => $row['excerpt'],
                     'body' => $row['body'],
                     'featured_image_url' => $row['featured_image_url'],
