@@ -20,6 +20,7 @@ RUN a2enmod rewrite headers \
        libonig-dev \
        libxml2-dev \
        libsqlite3-dev \
+       libpq-dev \
        git \
        unzip \
   && docker-php-ext-configure gd --with-freetype --with-jpeg \
