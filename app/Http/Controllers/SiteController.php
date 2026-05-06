@@ -27,11 +27,7 @@ class SiteController extends Controller
                 ['Under construction', 'Under construction'],
                 ['New launch', 'New launch'],
             ],
-            'project_type_choices' => [
-                ['commercial', 'Commercial'],
-                ['residential', 'Residential'],
-                ['sco', 'SCO'],
-            ],
+            'project_type_choices' => Property::projectTypeTuples(),
         ]);
     }
 
@@ -62,7 +58,7 @@ class SiteController extends Controller
         }
 
         $projectType = trim((string) $request->query('project_type', ''));
-        if (in_array($projectType, ['commercial', 'residential', 'sco'], true)) {
+        if (in_array($projectType, Property::allowedProjectTypes(), true)) {
             $query->where('project_type', $projectType);
         }
 
@@ -83,16 +79,12 @@ class SiteController extends Controller
                 ['Under construction', 'Under construction'],
                 ['New launch', 'New launch'],
             ],
-            'project_type_choices' => [
-                ['commercial', 'Commercial'],
-                ['residential', 'Residential'],
-                ['sco', 'SCO'],
-            ],
+            'project_type_choices' => Property::projectTypeTuples(),
             'active_statuses' => $statuses ?? [],
             'active_city_slug' => $citySlug ?? '',
-            'active_project_type' => in_array($projectType, ['commercial', 'residential', 'sco'], true) ? $projectType : '',
+            'active_project_type' => in_array($projectType, Property::allowedProjectTypes(), true) ? $projectType : '',
             'active_q' => $q ?? '',
-            'has_active_filters' => (bool) (($q ?? '') || !empty($statuses ?? []) || ($citySlug ?? '') || in_array($projectType, ['commercial', 'residential', 'sco'], true)),
+            'has_active_filters' => (bool) (($q ?? '') || !empty($statuses ?? []) || ($citySlug ?? '') || in_array($projectType, Property::allowedProjectTypes(), true)),
         ]);
     }
 

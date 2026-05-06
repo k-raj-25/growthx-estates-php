@@ -79,11 +79,7 @@ class PropertyResource extends Resource
                     ])
                     ->required(),
                 Forms\Components\Select::make('project_type')
-                    ->options([
-                        'residential' => 'Residential',
-                        'commercial' => 'Commercial',
-                        'sco' => 'SCO',
-                    ])
+                    ->options(Property::projectTypeOptions())
                     ->required(),
                 Forms\Components\TextInput::make('brochure_url')->maxLength(500)->url()->nullable(),
                 Forms\Components\Toggle::make('is_published')->default(true)->required(),

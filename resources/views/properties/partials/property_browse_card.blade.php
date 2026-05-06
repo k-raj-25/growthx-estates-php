@@ -1,10 +1,5 @@
 @php
-  $projectTypeLabel = match($p->project_type) {
-      'commercial' => 'Commercial',
-      'residential' => 'Residential',
-      'sco' => 'SCO',
-      default => ucfirst((string) $p->project_type),
-  };
+  $projectTypeLabel = \App\Models\Property::projectTypeLabel($p->project_type);
 @endphp
 <article
   class="property-browse-card {{ $extra_class ?? '' }}"

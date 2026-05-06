@@ -4266,6 +4266,11 @@ button.careers-opening-card:focus-visible {
   color: #fde68a;
 }
 
+.property-type-badge--industrial {
+  border-color: rgba(251, 146, 60, 0.5);
+  color: #fdba74;
+}
+
 .property-type-badge--lg {
   position: static;
   display: inline-flex;

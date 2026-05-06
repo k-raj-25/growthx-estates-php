@@ -2,12 +2,7 @@
 @section('title', $property->name . ' — GrowthX Estates')
 @section('content')
   @php
-    $projectTypeLabel = match($property->project_type) {
-        'commercial' => 'Commercial',
-        'residential' => 'Residential',
-        'sco' => 'SCO',
-        default => ucfirst((string) $property->project_type),
-    };
+    $projectTypeLabel = \App\Models\Property::projectTypeLabel($property->project_type);
   @endphp
   <main class="page-main property-detail-page">
     @include('partials.page_decor_property_detail')

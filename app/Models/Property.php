@@ -50,6 +50,43 @@ class Property extends Model
         return $same->concat($rest)->take($limit)->values();
     }
 
+    /** @return array<string, string> slug => label */
+    public static function projectTypeOptions(): array
+    {
+        return [
+            'commercial' => 'Commercial',
+            'residential' => 'Residential',
+            'sco' => 'SCO',
+            'industrial' => 'Industrial',
+        ];
+    }
+
+    /** @return list<array{0:string,1:string}> [slug, label] for Blade selects */
+    public static function projectTypeTuples(): array
+    {
+        $out = [];
+        foreach (self::projectTypeOptions() as $slug => $label) {
+            $out[] = [$slug, $label];
+        }
+
+        return $out;
+    }
+
+    /** @return list<string> */
+    public static function allowedProjectTypes(): array
+    {
+        return array_keys(self::projectTypeOptions());
+    }
+
+    public static function projectTypeLabel(?string $type): string
+    {
+        if ($type === null || $type === '') {
+            return '';
+        }
+
+        return self::projectTypeOptions()[$type] ?? ucfirst($type);
+    }
+
     protected static function booted(): void
     {
         static::saving(function (Property $property): void {
