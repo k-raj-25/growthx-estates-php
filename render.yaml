@@ -7,6 +7,10 @@
 #   APP_URL           https://<your-service>.onrender.com
 #   DATABASE_URL      if using Render Postgres: Internal Database URL; also set DB_CONNECTION=pgsql
 #                     (config/database.php reads DATABASE_URL when DB_URL is unset)
+# Optional (no Shell needed): first Filament login — set on deploy, then clear ADMIN_PASSWORD after use
+#   ADMIN_EMAIL       e.g. you@company.com
+#   ADMIN_PASSWORD    strong one-time password
+#   ADMIN_NAME        optional display name (default Admin)
 services:
   - type: web
     name: growthx-estates
@@ -27,3 +31,9 @@ services:
         sync: false
       - key: DB_CONNECTION
         value: pgsql
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: ADMIN_NAME
+        sync: false

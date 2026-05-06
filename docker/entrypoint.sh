@@ -22,6 +22,8 @@ php artisan view:cache
 
 php artisan migrate --force
 
+php artisan db:seed --class=Database\\Seeders\\AdminUserSeeder --force
+
 php artisan storage:link --force --no-interaction || true
 
 exec apache2-foreground
