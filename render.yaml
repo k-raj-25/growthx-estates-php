@@ -6,12 +6,14 @@
 #   APP_KEY           output of: php artisan key:generate --show
 #   APP_URL           https://<your-service>.onrender.com
 #   DATABASE_URL      if using Render Postgres: Internal Database URL; also set DB_CONNECTION=pgsql
+#                     (config/database.php reads DATABASE_URL when DB_URL is unset)
 services:
   - type: web
     name: growthx-estates
     runtime: docker
     dockerfilePath: ./Dockerfile
-    healthCheckPath: /
+    # /up avoids DB on health checks; / hits the homepage which queries the database
+    healthCheckPath: /up
     envVars:
       - key: APP_ENV
         value: production
