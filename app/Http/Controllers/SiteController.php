@@ -20,8 +20,18 @@ class SiteController extends Controller
             ->orderBy('name')
             ->get();
 
+        $featuredProperties = Property::query()
+            ->where('is_published', true)
+            ->where('is_featured', true)
+            ->with('city')
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->limit(3)
+            ->get();
+
         return view('index', [
             'cities_with_listings' => $citiesWithListings,
+            'featured_properties' => $featuredProperties,
             'status_choices' => [
                 ['Ready to move', 'Ready to move'],
                 ['Under construction', 'Under construction'],

@@ -14,7 +14,7 @@ class Property extends Model
 
     protected $fillable = [
         'slug','name','city_id','location','price_display','rating','status','project_type','brochure_url','description',
-        'developer_name','about_developer','rera_id','project_size','map_embed_url','images','amenities','videos','faq','is_published','sort_order',
+        'developer_name','about_developer','rera_id','project_size','map_embed_url','images','amenities','videos','faq','is_published','is_featured','sort_order',
     ];
 
     protected $casts = [
@@ -23,6 +23,7 @@ class Property extends Model
         'videos' => 'array',
         'faq' => 'array',
         'is_published' => 'boolean',
+        'is_featured' => 'boolean',
         'rating' => 'decimal:2',
     ];
 

@@ -61,6 +61,7 @@ class ImportDjangoData extends Command
                     'developer_name' => $f['developer_name'] ?? '', 'about_developer' => $f['about_developer'] ?? '', 'rera_id' => $f['rera_id'] ?? '',
                     'project_size' => $f['project_size'] ?? '', 'map_embed_url' => $f['map_embed_url'] ?? '', 'images' => $f['images'] ?? [],
                     'amenities' => $f['amenities'] ?? [], 'videos' => $f['videos'] ?? [], 'faq' => $f['faq'] ?? [], 'is_published' => $f['is_published'] ?? true,
+                    'is_featured' => $f['is_featured'] ?? false,
                     'sort_order' => $f['sort_order'] ?? 0,
                 ]),
                 'website.siteenquiry' => SiteEnquiry::query()->updateOrCreate(['id' => $pk], [

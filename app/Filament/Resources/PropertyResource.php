@@ -83,6 +83,9 @@ class PropertyResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('brochure_url')->maxLength(500)->url()->nullable(),
                 Forms\Components\Toggle::make('is_published')->default(true)->required(),
+                Forms\Components\Toggle::make('is_featured')
+                    ->default(false)
+                    ->helperText('Homepage Featured Properties shows up to 3 published records ordered by Sort order.'),
                 Forms\Components\TextInput::make('sort_order')->numeric()->default(0)->required(),
             ])->columns(2),
             Forms\Components\Section::make('Marketing')->schema([
@@ -115,10 +118,13 @@ class PropertyResource extends Resource
                 Tables\Columns\TextColumn::make('status')->sortable()->badge(),
                 Tables\Columns\TextColumn::make('project_type')->sortable(),
                 Tables\Columns\IconColumn::make('is_published')->boolean(),
+                Tables\Columns\IconColumn::make('is_featured')->boolean(),
                 Tables\Columns\TextColumn::make('updated_at')->dateTime()->sortable()->toggleable(isToggledHiddenByDefault: true),
             ])
             ->defaultSort('sort_order')
-            ->filters([])
+            ->filters([
+                Tables\Filters\TernaryFilter::make('is_featured')->label('Featured'),
+            ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),

@@ -119,71 +119,42 @@
       <div class="section-inner">
         <p class="eyebrow reveal">PROPERTIES</p>
         <h2 class="section-title reveal">Featured Properties</h2>
-        <div class="properties-grid">
-          <a href="{{ route('properties.detail', ['slug' => 'skyline-residence']) }}" class="property-card property-card--large reveal" aria-label="View Skyline Residence">
-            <img
-              src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&q=80"
-              alt="Skyline residence tower"
-              width="900"
-              height="1200"
-              loading="lazy"
-            />
-            <div class="property-overlay">
-              <div class="property-meta">
-                <p class="property-price">$1.25M</p>
-                <p class="property-name">Skyline Residence</p>
-                <p class="property-loc">New York, NY</p>
-              </div>
-              <span class="property-arrow" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" />
-                </svg>
-              </span>
-            </div>
-          </a>
-          <a href="{{ route('properties.detail', ['slug' => 'azure-villa']) }}" class="property-card reveal" aria-label="View Azure Villa">
-            <img
-              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80"
-              alt="Luxury villa with swimming pool"
-              width="900"
-              height="600"
-              loading="lazy"
-            />
-            <div class="property-overlay">
-              <div class="property-meta">
-                <p class="property-price">$2.5M</p>
-                <p class="property-name">Azure Villa</p>
-                <p class="property-loc">Miami, FL</p>
-              </div>
-              <span class="property-arrow" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" />
-                </svg>
-              </span>
-            </div>
-          </a>
-          <a href="{{ route('properties.detail', ['slug' => 'heritage-row']) }}" class="property-card reveal" aria-label="View Heritage Row">
-            <img
-              src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80"
-              alt="Urban townhomes"
-              width="700"
-              height="450"
-              loading="lazy"
-            />
-            <div class="property-overlay">
-              <div class="property-meta">
-                <p class="property-price">$850K</p>
-                <p class="property-name">Heritage Row</p>
-                <p class="property-loc">Chicago, IL</p>
-              </div>
-              <span class="property-arrow" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" />
-                </svg>
-              </span>
-            </div>
-          </a>
-        </div>
+        @if($featured_properties->isNotEmpty())
+          <div class="properties-grid">
+            @foreach($featured_properties as $p)
+              <a
+                href="{{ route('properties.detail', ['slug' => $p->slug]) }}"
+                class="property-card {{ $loop->first ? 'property-card--large' : '' }} reveal"
+                aria-label="View {{ $p->name }}"
+              >
+                <img
+                  src="{{ $p->images[0] ?? '' }}"
+                  alt="{{ $p->name }}"
+                  width="{{ $loop->first ? '900' : '700' }}"
+                  height="{{ $loop->first ? '1200' : '450' }}"
+                  loading="lazy"
+                />
+                <div class="property-overlay">
+                  <div class="property-meta">
+                    <p class="property-price">{{ $p->price_display }}</p>
+                    <p class="property-name">{{ $p->name }}</p>
+                    <p class="property-loc">{{ $p->display_location }}</p>
+                  </div>
+                  <span class="property-arrow" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M7 17L17 7M17 7H7M17 7V17" />
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            @endforeach
+          </div>
+        @else
+          <p class="properties-empty reveal" role="status">
+            Featured homes are coming soon.
+            <a href="{{ route('properties.list') }}" class="service-link">Browse all properties →</a>
+          </p>
+        @endif
       </div>
     </section>
 

@@ -63,6 +63,7 @@ class DemoContentSeeder extends Seeder
                     'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80',
                 ],
                 'amenities' => ['Infinity pool', 'Concierge', 'Fitness suite', 'Rooftop terrace', 'Smart security'],
+                'is_featured' => true,
             ],
             [
                 'slug' => 'azure-villa',
@@ -86,6 +87,7 @@ class DemoContentSeeder extends Seeder
                     'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1200&q=80',
                 ],
                 'amenities' => ['Pool deck', 'Outdoor kitchen', 'Wine lounge', 'EV charging', 'Pet spa'],
+                'is_featured' => true,
             ],
             [
                 'slug' => 'heritage-row',
@@ -109,6 +111,7 @@ class DemoContentSeeder extends Seeder
                     'https://images.unsplash.com/photo-1513584684374-8bab748fbf90?w=1200&q=80',
                 ],
                 'amenities' => ['Co-working lounge', 'Bike storage', 'Parcel lockers', 'Fitness studio', 'Garden court'],
+                'is_featured' => true,
             ],
             [
                 'slug' => 'pacific-heights-reserve',
@@ -278,6 +281,7 @@ class DemoContentSeeder extends Seeder
                         ['q' => 'Is financing available?', 'a' => 'Yes. Our team can connect you with partner lenders.'],
                     ],
                     'is_published' => true,
+                    'is_featured' => $row['is_featured'] ?? false,
                     'sort_order' => $i + 1,
                 ]
             );
