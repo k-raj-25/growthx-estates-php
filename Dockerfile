@@ -1,12 +1,5 @@
 # syntax=docker/dockerfile:1
 
-FROM node:22-bookworm-slim AS frontend
-WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci
-COPY . .
-RUN npm run build
-
 FROM php:8.4-apache-bookworm
 
 RUN a2enmod rewrite headers \
@@ -39,7 +32,6 @@ COPY composer.json composer.lock ./
 RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader --no-scripts
 
 COPY . .
-COPY --from=frontend /app/public/build ./public/build
 
 RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader --no-scripts \
   && chown -R www-data:www-data storage bootstrap/cache

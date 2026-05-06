@@ -7,6 +7,24 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Frontend Stack (No Node.js)
+
+This project serves the website UI from static assets only:
+
+- `public/static/css/styles.css`
+- `public/static/js/main.js`
+- `public/static/js/enquiry.js`
+
+No Vite/Tailwind build step is required for runtime or deployment. Keep these static assets as the source of truth to preserve the current UI and behavior.
+
+## CSS/Library Guidance
+
+To keep the current design unchanged, avoid globally adding Bootstrap CSS to existing pages. Bootstrap reset/styles can conflict with current classes (for example `.btn`, spacing, typography). If you need new libraries, prefer small CDN/vanilla additions and validate visual regressions page-by-page.
+
+## Shared Hosting Note (GoDaddy Deluxe)
+
+Node removal simplifies deployment, but this is still a Laravel + Filament app. Shared hosting must still support Laravel requirements (document root to `public/`, PHP extensions, Composer/vendor, `.env`, cache/config, migrations). If those constraints are hard to satisfy in your hosting panel, use Laravel-friendly hosting or a VPS.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

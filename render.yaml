@@ -1,4 +1,4 @@
-# Render Blueprint: Laravel + Vite via Docker (PHP, Composer, and npm run build happen in the Dockerfile).
+# Render Blueprint: Laravel via Docker (PHP + Composer only; no Node.js build step).
 # Apply from the Render dashboard: New → Blueprint → connect this repo, or set an existing Web Service to
 # Environment: Docker and clear custom Build/Start commands so the Dockerfile is used.
 #
