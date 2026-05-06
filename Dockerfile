@@ -7,7 +7,7 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM php:8.3-apache-bookworm
+FROM php:8.4-apache-bookworm
 
 RUN a2enmod rewrite headers \
   && apt-get update \
