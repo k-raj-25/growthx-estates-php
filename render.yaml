@@ -1,0 +1,27 @@
+# Render Blueprint: Laravel + Vite via Docker (PHP, Composer, and npm run build happen in the Dockerfile).
+# Apply from the Render dashboard: New → Blueprint → connect this repo, or set an existing Web Service to
+# Environment: Docker and clear custom Build/Start commands so the Dockerfile is used.
+#
+# Required dashboard/env vars (set in Render → your service → Environment):
+#   APP_KEY           output of: php artisan key:generate --show
+#   APP_URL           https://<your-service>.onrender.com
+#   DATABASE_URL      if using Render Postgres: Internal Database URL; also set DB_CONNECTION=pgsql
+services:
+  - type: web
+    name: growthx-estates
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: COMPOSER_ALLOW_SUPERUSER
+        value: "1"
+      - key: APP_KEY
+        sync: false
+      - key: APP_URL
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: DB_CONNECTION
+        value: pgsql
